@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+
+  icarus:
+    container_name: icarus-dedicated
+    image: micferna/icarus
+    hostname: icarus-dedicated
+    init: true
+    restart: "unless-stopped"
+    networks:
+      host:
+    ports:
+      - 17777:17777/udp
+      - 27015:27015/udp
+    volumes:
+      - data:/home/steam/.wine/drive_c/icarus
+      - game:/game/icarus
+    environment:
+      - SERVERNAME=AmazingServer
+      - BRANCH=public
+      - PORT=17777
+      - QUERYPORT=27015
+      - STEAM_USERID=1001
+      - STEAM_GROUPID=1001
+      - STEAM_ASYNC_TIMEOUT=60
+
+volumes:
+  data: {}
+  game: {}
+
+networks:
+  host: {}
